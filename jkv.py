@@ -39,10 +39,9 @@ try:
 except:
     print(f"     \x1b[38;5;199m[\x1b[0m~\x1b[38;5;199m] \x1b[0mFailed To Load Proxies From Proxies.txt")
 
-with open('Config.json') as f:
-    config = json.load(f)
 
-Token = input(f"token")
+
+Token = input(f"Token vai?")
 Bot = True
 if Bot == True:
     headers = {"Authorization": f"Bot {Token}"}
@@ -57,7 +56,7 @@ class LunaMisc:
             headers = {"Authorization": f"Bot {token}"}
         else:
             headers = {"Authorization": f"{token}"}
-        r = session.get("https://discord.com/api/v8/users/@me", headers=headers).result()
+        r = session.get("https://discord.com/api/v9/users/@me", headers=headers).result()
         if r.status_code == 200:
             return True
         else:
@@ -65,7 +64,7 @@ class LunaMisc:
 
     def Ban(guild_id, member_id):
         try:
-            r = session.put(f"https://discord.com/api/v9guilds/{guild_id}/bans/{member_id}", headers=headers, proxies={"http": 'http://' + next(rotating)}).result()
+            r = session.put(f"https://discord.com/api/v9/guilds/{guild_id}/bans/{member_id}", headers=headers, proxies={"http": 'http://' + next(rotating)}).result()
             if r.status_code == 200 or r.status_code == 201 or r.status_code == 204:
                 print(f"     \x1b[38;5;199m[\x1b[0m~\x1b[38;5;199m] \x1b[0mSuccessfully Banned {member_id}")
             if r.status_code == 429:
@@ -75,7 +74,7 @@ class LunaMisc:
 
     def Unban(guild_id, member_id):
         try:
-            r = session.delete(f"https://discord.com/api/v{randint(6,8)}/guilds/{guild_id}/bans/{member_id}", headers=headers, proxies={"http": 'http://' + next(rotating)}).result()
+            r = session.delete(f"https://discord.com/api/v9/guilds/{guild_id}/bans/{member_id}", headers=headers, proxies={"http": 'http://' + next(rotating)}).result()
             if r.status_code == 200 or r.status_code == 201 or r.status_code == 204:
                 print(f"     \x1b[38;5;199m[\x1b[0m~\x1b[38;5;199m] \x1b[0mSuccessfully Unbanned {member_id}")
             if r.status_code == 429:
@@ -85,7 +84,7 @@ class LunaMisc:
 
     def Kick(guild_id, member_id):
         try:
-            r = session.put(f"https://discord.com/api/v{randint(6,8)}/guilds/{guild_id}/members/{member}", headers=headers, proxies={"http": 'http://' + next(rotating)}).result()
+            r = session.put(f"https://discord.com/api/v9/guilds/{guild_id}/members/{member}", headers=headers, proxies={"http": 'http://' + next(rotating)}).result()
             if r.status_code == 200 or r.status_code == 201 or r.status_code == 204:
                 print(f"     \x1b[38;5;199m[\x1b[0m~\x1b[38;5;199m] \x1b[0mSuccessfully Kicked {member_id}")
             if r.status_code == 429:
@@ -95,7 +94,7 @@ class LunaMisc:
 
     def Delete_Channel(channel_id):
         try:
-            r = session.delete(f"https://discord.com/api/v{randint(6,8)}/channels/{channel_id}", headers=headers, proxies={"http": 'http://' + next(rotating)}).result()
+            r = session.delete(f"https://discord.com/api/v9/channels/{channel_id}", headers=headers, proxies={"http": 'http://' + next(rotating)}).result()
             if r.status_code == 200 or r.status_code == 201 or r.status_code == 204:
                 print(f"     \x1b[38;5;199m[\x1b[0m~\x1b[38;5;199m] \x1b[0mSuccessfully Deleted {member_id}")
             if r.status_code == 429:
@@ -105,7 +104,7 @@ class LunaMisc:
 
     def Delete_Role(guild_id, role_id):
         try:
-            r = session.delete(f"https://discord.com/api/v{randint(6,8)}/guilds/{guild_id}/roles/{role_id}", headers=headers, proxies={"http": 'http://' + next(rotating)}).result()
+            r = session.delete(f"https://discord.com/api/v9/guilds/{guild_id}/roles/{role_id}", headers=headers, proxies={"http": 'http://' + next(rotating)}).result()
             if r.status_code == 200 or r.status_code == 201 or r.status_code == 204:
                 print(f"     \x1b[38;5;199m[\x1b[0m~\x1b[38;5;199m] \x1b[0mSuccessfully Deleted {member_id}")
             if r.status_code == 429:
@@ -117,7 +116,7 @@ class LunaMisc:
         try:
             name = ''.join(random.choice(string.ascii_lowercase + string.digits) for i in range(8))
             json = {'name': name, 'type': 0}
-            r = session.post(f'https://discord.com/api/v{randint(6,8)}/guilds/{guild_id}/channels', headers=headers, json=json, proxies={"http": 'http://' + next(rotating)}).result()
+            r = session.post(f'https://discord.com/api/v9/guilds/{guild_id}/channels', headers=headers, json=json, proxies={"http": 'http://' + next(rotating)}).result()
             if r.status_code == 200 or r.status_code == 201 or r.status_code == 204:
                 print(f"     \x1b[38;5;199m[\x1b[0m~\x1b[38;5;199m] \x1b[0mSuccessfully Created Channel {r.json()['id']}")
             if r.status_code == 429:
@@ -129,7 +128,7 @@ class LunaMisc:
         try:
             name = ''.join(random.choice(string.ascii_lowercase + string.digits) for i in range(8))
             json = {'name': name}
-            r = session.post(f'https://discord.com/api/v{randint(6,8)}/guilds/{guild_id}/roles', headers=headers, json=json, proxies={"http": 'http://' + next(rotating)}).result()
+            r = session.post(f'https://discord.com/api/v9/guilds/{guild_id}/roles', headers=headers, json=json, proxies={"http": 'http://' + next(rotating)}).result()
             if r.status_code == 200 or r.status_code == 201 or r.status_code == 204:
                 print(f"     \x1b[38;5;199m[\x1b[0m~\x1b[38;5;199m] \x1b[0mSuccessfully Created Role {r.json()['id']}")
             if r.status_code == 429:
@@ -144,7 +143,7 @@ def Init():
         guild = input(f"     \x1b[38;5;199m[\x1b[0m~\x1b[38;5;199m] \x1b[0mGuild\x1b[38;5;199m: \x1b[0m")
 
         try:
-            members = open('Scraped/Members.txt').readlines()
+            members = open('Scraped/members.txt').readlines()
             for member in members:
                 member = member.replace("\n", "")
                 user_ids.append(member)
@@ -180,6 +179,7 @@ def Menu(guild):
        / /   / / / / __ \/ __ `/
       / /___/ /_/ / / / / /_/ / 
      /_____/\__,_/_/ /_/\__,_/  \x1b[0mBETA\x1b[0m
+
      \x1b[38;5;199m[\x1b[0m1\x1b[38;5;199m] \x1b[0mBan Users
      \x1b[38;5;199m[\x1b[0m2\x1b[38;5;199m] \x1b[0mKick Users
      \x1b[38;5;199m[\x1b[0m3\x1b[38;5;199m] \x1b[0mUnban Users
