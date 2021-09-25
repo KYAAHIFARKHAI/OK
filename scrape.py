@@ -12,7 +12,7 @@ else:
 
 
 token = input(f"\x1b[38;5;196m[DOXXSCRAPER] \x1b[96mToken : \x1b[38;5;196m")
-Bot = False
+Bot = True
 intents = discord.Intents.all()
 intents.members = True
 if Bot == True:
